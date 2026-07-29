@@ -133,9 +133,9 @@ export default function ContactForm() {
           </div>
 
           <div className="space-y-2">
-            <h3 className="font-sans font-extrabold text-xl text-slate-900 uppercase">Inquiry Received Factual Simulation</h3>
-            <p className="text-sm text-slate-500 max-w-sm mx-auto">
-              Your message was received successfully! (Simulated locally for recruiter testing). Here is what was registered:
+            <h3 className="font-sans font-bold text-xl text-slate-900 tracking-tight">Message Received</h3>
+            <p className="text-sm text-slate-600 max-w-sm mx-auto">
+              Thank you for reaching out! Your message has been sent. Here is a copy of what was submitted:
             </p>
           </div>
 

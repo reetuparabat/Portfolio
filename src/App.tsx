@@ -1,8 +1,6 @@
 import { useState } from "react";
 import {
   ArrowRight,
-  BookOpen,
-  Briefcase,
   GraduationCap,
   Mail,
   Phone,
@@ -12,16 +10,18 @@ import {
   Github,
   Award,
   CheckCircle,
-  Clock,
-  ArrowUpRight,
-  Download
+  Download,
+  Code,
+  Sparkles
 } from "lucide-react";
-import { PERSONAL_INFO, PROJECTS, EDUCATION, INTERNSHIP } from "./data";
+import { PERSONAL_INFO, PROJECTS, EDUCATION } from "./data";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProjectCard from "./components/ProjectCard";
 import SkillsGrid from "./components/SkillsGrid";
 import ContactForm from "./components/ContactForm";
+import PerceptiqCaseStudyView from "./components/PerceptiqCaseStudyView";
+import ResumeView from "./components/ResumeView";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>("home");
@@ -32,364 +32,303 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col selection:bg-blue-100 selection:text-blue-900">
-      {/* Navigation */}
+    <div className="min-h-screen bg-[#F9FAFB] text-[#111827] font-sans flex flex-col selection:bg-blue-100 selection:text-blue-900">
+      {/* Navigation Header */}
       <Navbar activeTab={activeTab} setActiveTab={handleTabChange} />
 
       {/* Main Content Stage */}
       <main className="flex-grow">
-        {/* Render Active View */}
+        {/* VIEW 1: HOME PAGE */}
         {activeTab === "home" && (
-          <div id="home-view" className="space-y-16 py-12 md:py-20">
+          <div id="home-view" className="space-y-16 py-12 md:py-16">
+            
             {/* HERO SECTION */}
             <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                {/* Intro text */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
+                
+                {/* Hero Headline & Message */}
                 <div className="lg:col-span-7 space-y-6">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-mono font-bold uppercase tracking-wider">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-ping" />
-                    <span>Seeking ML Internships & Entry-level Opportunities</span>
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-mono font-bold uppercase tracking-wider">
+                    <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+                    <span>AIML Candidate & Aspiring ML Engineer</span>
                   </div>
 
-                  <h1 className="font-sans font-extrabold text-4xl sm:text-5xl md:text-6xl text-slate-900 leading-tight tracking-tight uppercase">
-                    Hi, I'm <span className="text-blue-600">{PERSONAL_INFO.name}</span>
+                  <h1 className="font-sans font-extrabold text-3xl sm:text-4xl md:text-5xl text-slate-900 leading-[1.18] tracking-tight [text-wrap:balance]">
+                    Building practical AI systems for real-world business problems.
                   </h1>
 
-                  <p className="font-sans text-xl sm:text-2xl text-slate-500 font-bold uppercase tracking-tight">
-                    {PERSONAL_INFO.branch}
+                  <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl font-sans">
+                    Hi, I'm <strong className="text-slate-900">{PERSONAL_INFO.name}</strong>, studying Computer Science (AI & ML) at {PERSONAL_INFO.college}. I specialize in explainable AI systems, evidence-based decision engines, and data applications.
                   </p>
 
-                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-xl font-sans">
-                    I am an AIML undergraduate at KLS VDIT building practical AI-powered applications using modern AI technologies. 
-                    I focus on building explainable AI systems, automating business processes, and designing centralized data platforms.
-                  </p>
-
-                  {/* Call to Actions */}
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                  {/* Primary & Secondary Call to Actions */}
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
                     <button
-                      onClick={() => handleTabChange("projects")}
+                      onClick={() => handleTabChange("project")}
                       id="hero-primary-cta"
-                      className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-full transition-all cursor-pointer shadow-sm hover:shadow-md"
+                      className="inline-flex items-center justify-center gap-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-3.5 rounded-full transition-all cursor-pointer shadow-2xs hover:shadow-xs text-sm"
                     >
-                      <span>Explore Projects</span>
+                      <span>Explore Perceptiq AI</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
 
-                    <button
-                      onClick={() => handleTabChange("about")}
+                    <a
+                      href="/Reetu_Parabat_Resume.pdf"
+                      download="Reetu_Parabat_Resume.pdf"
                       id="hero-secondary-cta"
-                      className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 font-bold px-6 py-3 rounded-full transition-all cursor-pointer"
+                      className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-bold px-6 py-3.5 rounded-full transition-all cursor-pointer text-sm shadow-2xs"
                     >
-                      <span>About & Education</span>
-                    </button>
+                      <Download className="w-4 h-4 text-slate-500" />
+                      <span>Download Resume</span>
+                    </a>
                   </div>
                 </div>
 
-                {/* Proof Statement Highlight Card */}
+                {/* Redesigned Compact Professional Summary Card */}
                 <div className="lg:col-span-5">
-                  <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-full blur-2xl -mr-8 -mt-8" />
-                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-emerald-50 rounded-full blur-2xl -ml-8 -mb-8" />
-
-                    <div className="flex items-center gap-2 text-emerald-600 font-mono text-xs uppercase tracking-wider font-bold">
-                      <Award className="w-4 h-4" />
-                      <span>Portfolio Proof Statement</span>
+                  <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 space-y-5 shadow-2xs hover:shadow-xs transition-shadow">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                      <div className="flex items-center gap-2 text-blue-600 font-mono text-xs uppercase tracking-wider font-bold">
+                        <Sparkles className="w-4 h-4" />
+                        <span>Portfolio Focus</span>
+                      </div>
+                      <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-mono font-bold uppercase">
+                        Active Candidate
+                      </span>
                     </div>
 
-                    <blockquote className="text-slate-700 text-sm sm:text-base italic leading-relaxed relative z-10 font-sans">
-                      "{PERSONAL_INFO.proofStatement}"
-                    </blockquote>
-
-                    <div className="border-t border-slate-100 pt-4 flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-bold text-slate-900 uppercase tracking-tight">{PERSONAL_INFO.name}</p>
-                        <p className="text-xs text-slate-400 font-mono font-bold uppercase tracking-wider">BE CSE (AI&ML) Candidate</p>
+                    <div className="grid grid-cols-2 gap-4 text-xs font-sans">
+                      <div className="space-y-1">
+                        <p className="font-mono text-slate-400 font-bold uppercase text-[10px]">Current Project</p>
+                        <p className="font-bold text-slate-900 text-sm">Perceptiq AI</p>
+                        <p className="text-slate-500 text-[11px]">AI Commerce Platform</p>
                       </div>
-                      <div className="text-xs text-slate-500 font-mono font-bold bg-slate-50 border border-slate-200 px-2.5 py-1 rounded">
-                        CGPA: 8.8
+
+                      <div className="space-y-1">
+                        <p className="font-mono text-slate-400 font-bold uppercase text-[10px]">Target Role</p>
+                        <p className="font-bold text-slate-900 text-sm">ML / AI Engineer</p>
+                        <p className="text-slate-500 text-[11px]">Full-Time / Internship</p>
+                      </div>
+
+                      <div className="space-y-1">
+                        <p className="font-mono text-slate-400 font-bold uppercase text-[10px]">Academic Degree</p>
+                        <p className="font-bold text-slate-900 text-sm">BE CSE (AI & ML)</p>
+                        <p className="text-slate-500 text-[11px] font-mono">CGPA: {EDUCATION.cgpa}</p>
+                      </div>
+
+                      <div className="space-y-1">
+                        <p className="font-mono text-slate-400 font-bold uppercase text-[10px]">Location</p>
+                        <p className="font-bold text-slate-900 text-sm">Karnataka, India</p>
+                        <p className="text-slate-500 text-[11px]">Open to Remote / Reloc.</p>
                       </div>
                     </div>
+
+                    <div className="border-t border-slate-100 pt-3 space-y-2">
+                      <p className="font-mono text-slate-400 font-bold uppercase text-[10px]">Core Capabilities</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        <span className="px-2.5 py-1 bg-slate-50 border border-slate-200 text-slate-800 text-[11px] font-mono font-semibold rounded-md">
+                          Explainable AI
+                        </span>
+                        <span className="px-2.5 py-1 bg-slate-50 border border-slate-200 text-slate-800 text-[11px] font-mono font-semibold rounded-md">
+                          Deterministic Scoring
+                        </span>
+                        <span className="px-2.5 py-1 bg-slate-50 border border-slate-200 text-slate-800 text-[11px] font-mono font-semibold rounded-md">
+                          Google Gemini SDK
+                        </span>
+                        <span className="px-2.5 py-1 bg-slate-50 border border-slate-200 text-slate-800 text-[11px] font-mono font-semibold rounded-md">
+                          TypeScript / Node
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            {/* FEATURED PROJECT SECTION (PERCEPTIQ AI) */}
+            <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+                <div className="space-y-1">
+                  <span className="text-xs font-mono font-bold text-blue-600 uppercase tracking-wider">
+                    Core Featured Project
+                  </span>
+                  <h2 className="font-sans font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight">
+                    Perceptiq AI – AI Commerce Intelligence Platform
+                  </h2>
+                </div>
+
+                <button
+                  onClick={() => handleTabChange("project")}
+                  id="home-explore-perceptiq-btn"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700 cursor-pointer group tracking-tight"
+                >
+                  <span>Explore Full Case Study</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </button>
+              </div>
+
+              {/* Render Primary Project Card */}
+              <ProjectCard
+                project={PROJECTS[0]}
+                onExploreCaseStudy={() => handleTabChange("project")}
+              />
+            </section>
+
+            {/* ABOUT ME SECTION */}
+            <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+              <div className="border-b border-slate-200 pb-4">
+                <h2 className="font-sans font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight">
+                  About & Academic Profile
+                </h2>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+                {/* Academic Profile */}
+                <div className="md:col-span-6 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xs">
+                  <div className="flex items-center gap-3 text-blue-600 font-bold text-sm uppercase tracking-wider font-mono">
+                    <GraduationCap className="w-5 h-5" />
+                    <h3>Academic Profile</h3>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-lg">{EDUCATION.institution}</h4>
+                    <p className="text-sm font-semibold text-slate-700 mt-1">{EDUCATION.degree}</p>
+                    <p className="text-xs font-mono text-slate-500 mt-0.5">{EDUCATION.duration}</p>
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans pt-1">
+                    Currently in 7th semester, specializing in Machine Learning, Neural Networks, Natural Language Processing, and Software Engineering.
+                  </p>
+                  <div className="pt-2">
+                    <span className="inline-block px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-mono font-bold rounded-lg border border-emerald-200">
+                      Academic Score: {EDUCATION.cgpa}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Practical AI/ML System Building Focus */}
+                <div className="md:col-span-6 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xs">
+                  <div className="flex items-center gap-3 text-blue-600 font-bold text-sm uppercase tracking-wider font-mono">
+                    <Sparkles className="w-5 h-5" />
+                    <h3>AI/ML Engineering Focus</h3>
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+                    I design and build practical AI systems that combine statistical language models with deterministic logic. Rather than treating AI as a black box, my work emphasizes explainability, verifiable data pipelines, and evidence extraction.
+                  </p>
+                  <div className="p-4 bg-blue-50/60 border border-blue-200/80 rounded-2xl space-y-1">
+                    <p className="font-bold text-xs font-mono uppercase text-blue-800">Core Engineering Objective:</p>
+                    <p className="text-xs text-slate-700 leading-relaxed">
+                      Transform raw AI model outputs into deterministic, reproducible business intelligence systems.
+                    </p>
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* FEATURED PROJECT SECTION */}
+            {/* TECHNICAL SKILLS SECTION */}
             <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <div className="space-y-2">
-                  <h2 className="font-sans font-extrabold text-2xl sm:text-3xl text-slate-900 uppercase tracking-tight">
-                    Featured AI/ML Project
-                  </h2>
-                  <p className="text-sm text-slate-500 max-w-lg leading-relaxed">
-                    Designed to address visibility gaps in AI recommendation and semantic web indexing systems.
-                  </p>
-                </div>
-
-                <button
-                  onClick={() => handleTabChange("projects")}
-                  className="inline-flex items-center gap-1 text-sm font-bold text-blue-600 hover:text-blue-700 cursor-pointer group uppercase tracking-wider"
-                >
-                  <span>Explore project details</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </button>
-              </div>
-
-              {/* Render the core Perceptiq AI project */}
-              <ProjectCard project={PROJECTS[0]} />
-            </section>
-
-            {/* SKILLS PREVIEW SECTION */}
-            <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <div className="space-y-2">
-                  <h2 className="font-sans font-extrabold text-2xl sm:text-3xl text-slate-900 uppercase tracking-tight">
-                    Core Technical Strengths
-                  </h2>
-                  <p className="text-sm text-slate-500 max-w-lg leading-relaxed">
-                    Languages, tools, and platforms utilized during my projects and academic coursework.
-                  </p>
-                </div>
-
-                <button
-                  onClick={() => handleTabChange("about")}
-                  className="inline-flex items-center gap-1 text-sm font-bold text-blue-600 hover:text-blue-700 cursor-pointer group uppercase tracking-wider"
-                >
-                  <span>View full resume journey</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </button>
+              <div className="border-b border-slate-200 pb-4">
+                <h2 className="font-sans font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight">
+                  Core Technical Strengths
+                </h2>
               </div>
 
               <SkillsGrid />
             </section>
 
-            {/* PERSISTENT CONTACT CTA SECTION */}
+            {/* UNIFIED CONVERSION / NEXT STEPS SECTION */}
             <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-lg border border-slate-800">
-                {/* Decorative absolute patterns */}
-                <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500 rounded-full blur-3xl -mr-32 -mt-32 opacity-20" />
-                <div className="absolute bottom-0 left-0 w-80 h-80 bg-indigo-700 rounded-full blur-3xl -ml-32 -mb-32 opacity-20" />
-
-                <div className="relative z-10 max-w-2xl space-y-6">
-                  <h3 className="font-sans font-extrabold text-3xl sm:text-4xl tracking-tight uppercase">
-                    Are you looking for an ML Intern or Junior Engineer?
+              <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xs border border-slate-800">
+                <div className="space-y-2 text-center md:text-left max-w-xl">
+                  <span className="text-xs font-mono font-bold text-blue-400 uppercase tracking-wider">
+                    Next Steps
+                  </span>
+                  <h3 className="font-sans font-extrabold text-2xl sm:text-3xl tracking-tight">
+                    Review Qualifications or Connect
                   </h3>
-                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                    I am actively seeking internship opportunities starting immediately or entry-level positions where I can apply my AIML knowledge. 
-                    Let's connect, examine my project source code, and schedule a talk.
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    Explore my full academic background and project history on the Resume page, or reach out directly regarding engineering opportunities.
                   </p>
-
-                  <div className="flex flex-wrap items-center gap-6 pt-2">
-                    <button
-                      onClick={() => handleTabChange("contact")}
-                      className="inline-flex items-center gap-2 bg-blue-600 text-white font-bold px-6 py-3 rounded-full hover:bg-blue-700 transition-colors cursor-pointer shadow-sm"
-                    >
-                      Get in Touch
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                    <a
-                      href={`mailto:${PERSONAL_INFO.email}`}
-                      className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-white font-bold transition-colors uppercase tracking-wider"
-                    >
-                      <Mail className="w-4 h-4 text-blue-500" />
-                      <span>{PERSONAL_INFO.email}</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-        )}
-
-        {activeTab === "projects" && (
-          <div id="projects-view" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 space-y-12">
-            <div className="space-y-3 border-b border-slate-200 pb-8">
-              <h1 className="font-sans font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight uppercase">
-                Projects
-              </h1>
-              <p className="text-sm sm:text-base text-slate-500 max-w-2xl leading-relaxed font-sans">
-                Explore detailed breakdowns of my engineering implementations, including the specific problems addressed, developed solutions, feature logs, and tech stacks.
-              </p>
-            </div>
-
-            <div className="space-y-12">
-              {PROJECTS.map((project) => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {activeTab === "about" && (
-          <div id="about-view" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 space-y-16">
-            {/* ABOUT ME GRID */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-              {/* Profile Card & Info */}
-              <div className="lg:col-span-5 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-2xl bg-blue-600 flex items-center justify-center text-white text-2xl font-sans font-extrabold">
-                    RP
-                  </div>
-                  <div>
-                    <h2 className="font-sans font-bold text-xl text-slate-900">{PERSONAL_INFO.name}</h2>
-                    <p className="text-xs font-mono text-blue-600 font-bold uppercase tracking-wider">{PERSONAL_INFO.careerGoal}</p>
-                  </div>
                 </div>
 
-                <div className="border-t border-slate-100 pt-6 space-y-4">
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">Contact Details</h3>
-                  <div className="space-y-3">
-                    <a href={`mailto:${PERSONAL_INFO.email}`} className="flex items-center gap-3 text-sm text-slate-600 hover:text-blue-600 transition-colors font-semibold">
-                      <Mail className="w-4 h-4 text-slate-400" />
-                      <span>{PERSONAL_INFO.email}</span>
-                    </a>
-                    <a href={`tel:${PERSONAL_INFO.phone}`} className="flex items-center gap-3 text-sm text-slate-600 hover:text-blue-600 transition-colors font-semibold">
-                      <Phone className="w-4 h-4 text-slate-400" />
-                      <span>+91 {PERSONAL_INFO.phone}</span>
-                    </a>
-                    <div className="flex items-center gap-3 text-sm text-slate-600 font-semibold">
-                      <MapPin className="w-4 h-4 text-slate-400" />
-                      <span>{PERSONAL_INFO.location}</span>
-                    </div>
-                  </div>
-                </div>
+                <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
+                  <button
+                    onClick={() => handleTabChange("contact")}
+                    id="home-contact-cta-btn"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3.5 rounded-full text-xs transition-colors shadow-2xs cursor-pointer"
+                  >
+                    <span>Get in Touch</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
 
-                <div className="border-t border-slate-100 pt-6 flex flex-col gap-3">
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <a
-                      href={PERSONAL_INFO.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-2 bg-white border border-slate-200 py-2.5 px-4 rounded-full text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors"
-                    >
-                      <Github className="w-4 h-4 text-slate-400" />
-                      <span>GitHub Profile</span>
-                    </a>
-                    <a
-                      href={PERSONAL_INFO.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-2 bg-white border border-slate-200 py-2.5 px-4 rounded-full text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors"
-                    >
-                      <Linkedin className="w-4 h-4 text-blue-500" />
-                      <span>LinkedIn Profile</span>
-                    </a>
-                  </div>
+                  <button
+                    onClick={() => handleTabChange("resume")}
+                    id="home-resume-cta-btn"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 font-bold px-6 py-3.5 rounded-full text-xs transition-colors cursor-pointer"
+                  >
+                    <FileText className="w-4 h-4 text-slate-400" />
+                    <span>View Resume</span>
+                  </button>
+
                   <a
                     href="/Reetu_Parabat_Resume.pdf"
                     download="Reetu_Parabat_Resume.pdf"
-                    id="resume-download-about"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-full text-xs font-bold transition-all shadow-sm cursor-pointer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-slate-900 hover:bg-slate-100 font-bold px-5 py-3.5 rounded-full text-xs transition-colors shadow-2xs"
                   >
                     <Download className="w-4 h-4" />
-                    <span>Download Resume (PDF)</span>
+                    <span>PDF</span>
                   </a>
                 </div>
               </div>
+            </section>
 
-              {/* Biography Columns */}
-              <div className="lg:col-span-7 space-y-8">
-                <div className="space-y-4">
-                  <h1 className="font-sans font-extrabold text-3xl text-slate-900 tracking-tight uppercase">
-                    My Biography
-                  </h1>
-                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-sans">
-                    I am a Computer Science and Engineering student specializing in Artificial Intelligence and Machine Learning (AIML) at KLS Vishwanathrao Deshpande Institute Of Technology, currently in my 7th semester. I maintain a cumulative CGPA of 8.8, reflecting strong academic diligence.
-                  </p>
-                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-sans">
-                    My core technical objective is to become a Machine Learning Engineer. I am currently building foundational skills in Python and ML, and I am seeking an opportunity to apply structured, deterministic, and mathematical problem-solving skills while further developing my knowledge in Generative AI, LLM integration, and prompt engineering. I am eager to learn, grow, and contribute to impactful, AI-driven solutions inside a technical, production-facing team environment.
-                  </p>
-                </div>
-
-                {/* EDUCATION CARD */}
-                <div className="space-y-4">
-                  <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-slate-400 font-mono">
-                    <GraduationCap className="w-4 h-4 text-blue-600" />
-                    <span>Education</span>
-                  </h3>
-                  <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-3 shadow-sm">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                      <h4 className="font-sans font-bold text-base text-slate-900 uppercase tracking-tight">
-                        {EDUCATION.institution}
-                      </h4>
-                      <span className="text-xs font-mono font-semibold text-slate-500">{EDUCATION.duration}</span>
-                    </div>
-                    <p className="text-sm text-slate-600 font-semibold font-sans">
-                      {EDUCATION.degree}
-                    </p>
-                    <div className="inline-block px-2.5 py-1 rounded bg-blue-50 border border-blue-100 text-blue-700 font-mono text-xs font-bold uppercase tracking-wider">
-                      Academic Score: {EDUCATION.cgpa}
-                    </div>
-                  </div>
-                </div>
-
-                {/* INTERNSHIP CARD */}
-                <div className="space-y-4">
-                  <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-slate-400 font-mono">
-                    <Briefcase className="w-4 h-4 text-blue-600" />
-                    <span>Practical Internships</span>
-                  </h3>
-                  <div className="bg-white border border-slate-200 p-5 rounded-2xl space-y-3 shadow-sm">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                      <h4 className="font-sans font-bold text-base text-slate-900 uppercase tracking-tight">
-                        {INTERNSHIP.title}
-                      </h4>
-                      <span className="text-xs font-mono font-semibold text-slate-500">{INTERNSHIP.duration}</span>
-                    </div>
-                    <p className="text-xs font-mono text-emerald-600 font-bold uppercase tracking-wider">{INTERNSHIP.company}</p>
-                    <ul className="space-y-2 text-xs md:text-sm text-slate-600 pl-4 list-disc font-sans">
-                      {INTERNSHIP.bulletPoints.map((bp, i) => (
-                        <li key={i} className="leading-relaxed">{bp}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* FULL SKILLS MATRIX */}
-            <div className="space-y-8 border-t border-slate-200 pt-12">
-              <div className="space-y-2 text-center max-w-xl mx-auto">
-                <h2 className="font-sans font-extrabold text-2xl text-slate-900 tracking-tight uppercase">
-                  Technical Skills Matrix
-                </h2>
-                <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-sans">
-                  Languages, tools, and environments I use to design and develop practical applications.
-                </p>
-              </div>
-
-              <SkillsGrid />
-            </div>
           </div>
         )}
 
+        {/* VIEW 2: PROJECT PAGE (PERCEPTIQ AI CASE STUDY) */}
+        {activeTab === "project" && (
+          <div id="project-view" className="py-6">
+            <PerceptiqCaseStudyView
+              onNavigateToContact={() => handleTabChange("contact")}
+              onNavigateToResume={() => handleTabChange("resume")}
+            />
+          </div>
+        )}
+
+        {/* VIEW 3: RESUME PAGE */}
+        {activeTab === "resume" && (
+          <div id="resume-view" className="py-6">
+            <ResumeView />
+          </div>
+        )}
+
+        {/* VIEW 4: CONTACT PAGE */}
         {activeTab === "contact" && (
           <div id="contact-view" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 space-y-12">
             <div className="space-y-3 border-b border-slate-200 pb-8 text-center max-w-2xl mx-auto">
-              <h1 className="font-sans font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight uppercase">
-                Connect With Me
+              <h1 className="font-sans font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+                Get In Touch
               </h1>
-              <p className="text-sm sm:text-base text-slate-500 leading-relaxed font-sans">
-                Let's discuss internship opportunities, entry-level ML engineer openings, or technical collaborations. Fill out the direct recruiter inquiry form below.
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-sans">
+                I am actively seeking Machine Learning Engineer entry-level positions and internship opportunities. Please reach out via email, phone, or the form below.
               </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-5xl mx-auto">
-              {/* Contact Information Cards */}
+              {/* Contact Info Side Card */}
               <div className="lg:col-span-5 space-y-4">
-                <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-6 shadow-sm">
-                  <h3 className="font-sans font-bold text-lg text-slate-900 border-b border-slate-100 pb-3 uppercase tracking-tight">
-                    Contact Channels
+                <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xs">
+                  <h3 className="font-sans font-bold text-lg text-slate-900 border-b border-slate-100 pb-3">
+                    Direct Contact Channels
                   </h3>
 
-                  <div className="space-y-4">
+                  <div className="space-y-5">
                     <div className="flex items-start gap-3">
                       <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl">
                         <Mail className="w-5 h-5" />
                       </div>
                       <div>
                         <p className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">Email Address</p>
-                        <a href={`mailto:${PERSONAL_INFO.email}`} className="text-sm text-slate-700 hover:text-blue-600 font-bold break-all">
+                        <a href={`mailto:${PERSONAL_INFO.email}`} className="text-sm text-slate-800 hover:text-blue-600 font-bold break-all">
                           {PERSONAL_INFO.email}
                         </a>
                       </div>
@@ -400,8 +339,8 @@ export default function App() {
                         <Phone className="w-5 h-5" />
                       </div>
                       <div>
-                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">Direct Phone</p>
-                        <a href={`tel:${PERSONAL_INFO.phone}`} className="text-sm text-slate-700 hover:text-blue-600 font-bold">
+                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">Phone</p>
+                        <a href={`tel:${PERSONAL_INFO.phone}`} className="text-sm text-slate-800 hover:text-blue-600 font-bold">
                           +91 {PERSONAL_INFO.phone}
                         </a>
                       </div>
@@ -412,8 +351,42 @@ export default function App() {
                         <MapPin className="w-5 h-5" />
                       </div>
                       <div>
-                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">Current Location</p>
-                        <p className="text-sm text-slate-700 font-bold">{PERSONAL_INFO.location}</p>
+                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">Location</p>
+                        <p className="text-sm text-slate-800 font-bold">{PERSONAL_INFO.location}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl">
+                        <Github className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">GitHub Repository</p>
+                        <a
+                          href="https://github.com/reetuparabat/Perceptiq-AI"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-blue-600 hover:underline font-bold break-all inline-flex items-center gap-1"
+                        >
+                          <span>github.com/reetuparabat/Perceptiq-AI</span>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl">
+                        <Linkedin className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">LinkedIn Profile</p>
+                        <a
+                          href={PERSONAL_INFO.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-blue-600 hover:underline font-bold break-all"
+                        >
+                          {PERSONAL_INFO.linkedin}
+                        </a>
                       </div>
                     </div>
 
@@ -421,8 +394,8 @@ export default function App() {
                       <a
                         href="/Reetu_Parabat_Resume.pdf"
                         download="Reetu_Parabat_Resume.pdf"
-                        id="resume-download-contact"
-                        className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-full text-xs font-bold transition-all shadow-sm cursor-pointer"
+                        id="resume-download-contact-page"
+                        className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-full text-xs font-bold transition-all shadow-xs cursor-pointer"
                       >
                         <Download className="w-4 h-4" />
                         <span>Download Resume (PDF)</span>
@@ -441,7 +414,7 @@ export default function App() {
         )}
       </main>
 
-      {/* Footer */}
+      {/* Global Footer */}
       <Footer setActiveTab={handleTabChange} />
     </div>
   );

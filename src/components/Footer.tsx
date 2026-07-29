@@ -36,19 +36,19 @@ export default function Footer({ setActiveTab }: FooterProps) {
                 onClick={() => handleNavClick("home")}
                 className="text-sm text-slate-500 hover:text-blue-600 text-left transition-colors cursor-pointer font-semibold"
               >
-                Dashboard
+                Home
               </button>
               <button
-                onClick={() => handleNavClick("projects")}
+                onClick={() => handleNavClick("project")}
                 className="text-sm text-slate-500 hover:text-blue-600 text-left transition-colors cursor-pointer font-semibold"
               >
-                All Projects
+                Project (Perceptiq AI)
               </button>
               <button
-                onClick={() => handleNavClick("about")}
+                onClick={() => handleNavClick("resume")}
                 className="text-sm text-slate-500 hover:text-blue-600 text-left transition-colors cursor-pointer font-semibold"
               >
-                Skills & Profile
+                Resume
               </button>
               <button
                 onClick={() => handleNavClick("contact")}

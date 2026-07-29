@@ -166,12 +166,20 @@ export const PROJECTS: Project[] = [
 
 export const SKILLS: SkillCategory[] = [
   {
-    category: "Programming",
-    skills: ["Python", "Java"]
+    category: "Programming Languages",
+    skills: ["Python", "Java", "TypeScript", "JavaScript", "SQL", "HTML / CSS"]
   },
   {
-    category: "Tools",
-    skills: ["Git", "GitHub", "Visual Studio Code"]
+    category: "AI & Machine Learning",
+    skills: ["Google Gemini API", "Explainable AI (XAI)", "Deterministic Scoring", "Evidence Extraction", "Prompt Engineering"]
+  },
+  {
+    category: "Full-Stack Web Development",
+    skills: ["React 18", "Node.js", "Express.js", "RESTful APIs", "Tailwind CSS", "Vite"]
+  },
+  {
+    category: "Developer Tools & Systems",
+    skills: ["Git", "GitHub", "Visual Studio Code", "ESBuild", "JSON Schema Validation", "Postman"]
   }
 ];
 

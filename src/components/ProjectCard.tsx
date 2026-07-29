@@ -5,43 +5,54 @@ import CaseStudyModal from "./CaseStudyModal";
 
 interface ProjectCardProps {
   project: Project;
+  onExploreCaseStudy?: () => void;
   key?: string;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project, onExploreCaseStudy }: ProjectCardProps) {
   const [isCaseStudyOpen, setIsCaseStudyOpen] = useState(false);
+
+  const handleCaseStudyClick = () => {
+    if (onExploreCaseStudy) {
+      onExploreCaseStudy();
+    } else {
+      setIsCaseStudyOpen(true);
+    }
+  };
 
   return (
     <>
       <div
         id={`project-card-${project.id}`}
-        className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 p-6 md:p-8 space-y-6"
+        className="bg-white rounded-3xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition-shadow p-6 md:p-8 space-y-6"
       >
         {/* Card Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
           <div>
-            <span className="inline-block px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-mono font-bold tracking-wide uppercase mb-2">
-              {project.type}
-            </span>
-            <h3 className="font-sans font-extrabold text-2xl text-slate-900 uppercase tracking-tight">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="inline-block px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-mono font-bold tracking-wide uppercase border border-blue-100">
+                {project.type}
+              </span>
+              <span className="text-xs font-mono text-slate-400 font-semibold">• {project.duration}</span>
+            </div>
+            <h3 className="font-sans font-extrabold text-2xl text-slate-900 tracking-tight">
               {project.name}
             </h3>
-            <p className="text-xs font-mono text-slate-400 mt-1">Duration: {project.duration}</p>
           </div>
 
           <div className="flex items-center gap-2">
             {project.caseStudy && (
               <button
-                onClick={() => setIsCaseStudyOpen(true)}
+                onClick={handleCaseStudyClick}
                 id={`view-case-study-top-${project.id}`}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold tracking-wide transition-all cursor-pointer shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold tracking-wide transition-all cursor-pointer shadow-2xs"
               >
                 <FileText className="w-3.5 h-3.5" />
-                <span>Read Case Study</span>
+                <span>Read Full Case Study</span>
               </button>
             )}
             {/* Status badge */}
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold uppercase tracking-wider">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span>{project.status}</span>
             </span>
@@ -135,62 +146,44 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
 
-        {/* Action Buttons & Resume Verification */}
+        {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-slate-100">
           <div className="flex items-center gap-3 flex-wrap">
             {project.caseStudy && (
               <button
-                onClick={() => setIsCaseStudyOpen(true)}
+                onClick={handleCaseStudyClick}
                 id={`view-case-study-${project.id}`}
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all cursor-pointer shadow-xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all cursor-pointer shadow-2xs"
               >
                 <FileText className="w-4 h-4" />
-                <span>View Case Study</span>
+                <span>Explore Full Case Study</span>
               </button>
             )}
 
-            {project.githubUrl ? (
+            {project.githubUrl && (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 id={`github-link-${project.id}`}
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-slate-800 bg-white border border-slate-200 rounded-full hover:bg-slate-50 transition-all cursor-pointer shadow-xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-slate-800 bg-white border border-slate-200 rounded-full hover:bg-slate-50 transition-all cursor-pointer shadow-2xs"
               >
-                <Github className="w-4 h-4" />
-                <span>Explore GitHub</span>
+                <Github className="w-4 h-4 text-slate-700" />
+                <span>Source Code on GitHub</span>
               </a>
-            ) : (
-              <span
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-slate-400 bg-slate-50 border border-slate-200 rounded-full cursor-default"
-                title="GitHub repository not available for this project."
-              >
-                <Github className="w-4 h-4" />
-                <span>Repository not available</span>
-              </span>
             )}
 
-            {project.liveDemoUrl ? (
+            {project.liveDemoUrl && (
               <a
                 href={project.liveDemoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 id={`live-demo-${project.id}`}
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all cursor-pointer shadow-xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-blue-700 bg-blue-50 border border-blue-200 rounded-full hover:bg-blue-100 transition-all cursor-pointer shadow-2xs"
               >
                 <ExternalLink className="w-4 h-4" />
                 <span>Live Demo</span>
               </a>
-            ) : (
-              <button
-                disabled
-                id={`live-demo-disabled-${project.id}`}
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-slate-400 bg-slate-50 border border-slate-150 rounded-full cursor-not-allowed"
-                title="Live demo link not provided for this project."
-              >
-                <ExternalLink className="w-4 h-4" />
-                <span>Demo: Not provided</span>
-              </button>
             )}
           </div>
         </div>
